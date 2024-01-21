@@ -15,8 +15,6 @@ import io.restassured.specification.RequestSpecification;
 import static io.restassured.response.Response.*;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
-import java.util.HashMap;
-import java.util.Map;
 import static io.restassured.RestAssured.*;
 
 
