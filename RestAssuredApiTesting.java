@@ -22,7 +22,7 @@ public class RestAssuredApiTesting {
 
 	 
 
- public void GET() {
+ public void get() {
 	    
 	 baseURI = "https://simple-books-api.glitch.me";
 	 when().get("/books"). 
@@ -31,7 +31,7 @@ public class RestAssuredApiTesting {
 	 .body("id[2]", equalTo(3));
    }
 
- public void GETandFindByJsonPath() {
+ public void GetAndFindByJsonPath() {
 	        
 	 Response re = given().contentType(ContentType.JSON).
 	 get("https://simple-books-api.glitch.me/books");
@@ -40,66 +40,60 @@ public class RestAssuredApiTesting {
 	      
    }
 
- public void test_POST() {
+ public void post() {
 	    	
-	JSONObject j1 = new JSONObject();
+    JSONObject j1 = new JSONObject();
     baseURI = "https://reqres.in/";
     j1.put("name", "john");
-	j1.put("job", "pilot");
+    j1.put("job", "pilot");
 	    	
-	given().
-	   header("Content-Type","application/json").
-	   contentType(ContentType.JSON).
-	   accept(ContentType.JSON).body(j1.toJSONString()).when().
-	   post("/api/users").
-	   then().statusCode(201);   
+    given().
+	header("Content-Type","application/json").
+	contentType(ContentType.JSON).
+	accept(ContentType.JSON).body(j1.toJSONString()).when().
+        post("/api/users").
+	then().statusCode(201);   
 	    
    }
 
 
-  public void test_PUT() {
+  public void put() {
 	    	
-	JSONObject jo = new JSONObject();
-	baseURI = "https://reqres.in/";
-	jo.put("name", "alex");
-    jo.put("job", "developer");
+   JSONObject jo = new JSONObject();
+   baseURI = "https://reqres.in/";
+   jo.put("name", "alex");
+   jo.put("job", "developer");
     
-	 given().
-	    contentType("application/json").
-	    body(jo.toJSONString()).
-	    when().put("/api/users/2"). 
-	    then().statusCode(200).body("name", equalTo("zef"));
-	    
-	     
-	}
+      given().
+	contentType("application/json").
+	body(jo.toJSONString()).
+	when().put("/api/users/2"). 
+	then().statusCode(200).body("name", equalTo("zef"));
+	         
+   }
 
-	 public void GetTokenAndPost() {
+   public void GetTokenAndPost() {
 	        
-	    JSONObject joo = new JSONObject();
-	    joo.put("clientName", "Dzej");
-	    joo.put("clientEmail", "bazzasszlntin@example.com");
+	JSONObject joo = new JSONObject();
+	joo.put("clientName", "john");
+	joo.put("clientEmail", "bazzasszlntin@example.com");
 	    
-	    Response roo = (Response) given().contentType(ContentType.JSON).
-	    		accept(ContentType.JSON). 
-	    		body(joo.toJSONString())
-	    		.post("https://simple-books-api.glitch.me/api-clients/");
+	Response roo = (Response) given().contentType(ContentType.JSON).
+	    	accept(ContentType.JSON). 
+	    	body(joo.toJSONString())
+	    	.post("https://simple-books-api.glitch.me/api-clients/");
 	    
-	    String token = roo.jsonPath().get("accessToken").toString();
+	String token = roo.jsonPath().get("accessToken").toString();
 	    
-	    JSONObject jo1 = new JSONObject();
-	    jo1.put("bookId", 1);
-	    jo1.put("customerName","john");
-	   given().
+	JSONObject jo1 = new JSONObject();
+	jo1.put("bookId", 1);
+	jo1.put("customerName","john");
+	  given().
 	     header("Authorization", "Bearer " + token). 
 	     contentType(ContentType.JSON).
-		 accept(ContentType.JSON).
-		 body(jo1.toJSONString()).
-		 when().post("https://simple-books-api.glitch.me/orders"). 
-		 then().statusCode(201);
-	   
-	   
-	    }
-
-
-	
+             accept(ContentType.JSON).
+             body(jo1.toJSONString()).
+	     when().post("https://simple-books-api.glitch.me/orders"). 
+	     then().statusCode(201);	   
+  }	
 }
